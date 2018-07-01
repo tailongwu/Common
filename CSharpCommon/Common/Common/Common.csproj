@@ -43,13 +43,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="EmailServer.cs" />
     <Compile Include="Helper.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="HttpHelper.cs" />
+    <Compile Include="MainProgram.cs" />
+    <Compile Include="Programs\HouseRanking.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
