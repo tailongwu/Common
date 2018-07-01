@@ -17,7 +17,7 @@ namespace Programs
         private const string REGEX_RANKING = @"[【]\d+[】]";
 
         private const string EMAIL_SUBJECT = "当前菁英公寓排名：{0}";
-
+        
         private static string Last_Query_Ranking;
 
         private Configuration _config;
@@ -36,7 +36,7 @@ namespace Programs
             if (!ranking.Equals(Last_Query_Ranking))
             {
                 Last_Query_Ranking = ranking;
-                SendEmailWithHouseRanking(ranking);
+                // SendEmailWithHouseRanking(ranking);
             }
             Thread.Sleep(1000 * 60 * 60);
         }
