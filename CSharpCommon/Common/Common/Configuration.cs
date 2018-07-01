@@ -15,6 +15,11 @@ namespace Common
         private string _sinaEmailPassword;
         private string _sinaEmailHost;
 
+        private string _tailongID;
+        private string _tailongQQEmail;
+
+        private string _xiyunQQEmail;
+
         public Configuration()
         {
             this.Initialize();
@@ -44,6 +49,30 @@ namespace Common
             }
         }
 
+        public string TailongID
+        {
+            get
+            {
+                return this._tailongID;
+            }
+        }
+
+        public string TailongQQEmail
+        {
+            get
+            {
+                return this._tailongQQEmail;
+            }
+        }
+
+        public string XiyunQQEmail
+        {
+            get
+            {
+                return this._xiyunQQEmail;
+            }
+        }
+
         public void Initialize()
         {
             this._sinaEmailAddress = string.Empty;
@@ -58,6 +87,15 @@ namespace Common
             this._sinaEmailAddress = sinaEmailInfoNode.SelectSingleNode("account").InnerText;
             this._sinaEmailPassword = sinaEmailInfoNode.SelectSingleNode("password").InnerText;
             this._sinaEmailHost = sinaEmailInfoNode.SelectSingleNode("host").InnerText;
+
+            // Initialize tailong's info
+            XmlNode tailongInfoNode = configurationNode.SelectSingleNode("tailongInfo");
+            this._tailongID = tailongInfoNode.SelectSingleNode("id").InnerText;
+            this._tailongQQEmail = tailongInfoNode.SelectSingleNode("qqEmail").InnerText;
+
+            // Initialize xiyun's info
+            XmlNode xiyunInfoNode = configurationNode.SelectSingleNode("xiyunInfo");
+            this._xiyunQQEmail = xiyunInfoNode.SelectSingleNode("qqEmail").InnerText;
         }
     }
 }

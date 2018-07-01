@@ -11,7 +11,6 @@ namespace HttpCommon
 {
     public class EmailServer
     {
-        private const string STRING_EMPTY = "";
         private const string SPLIT_SEMCOLON = ",";
 
         // Email regex pattern
@@ -28,21 +27,33 @@ namespace HttpCommon
         private string _emailPassword;
 
         public EmailServer(
-            string emailFrom,
             string emailAddresses,
-            string emailSubject = STRING_EMPTY,
-            string emailBody = STRING_EMPTY,
-            string emailHost = STRING_EMPTY,
-            string emailUserName = STRING_EMPTY,
-            string emailPassword = STRING_EMPTY)
+            string emailFrom = null,
+            string emailSubject = null,
+            string emailBody = null,
+            string emailHost = null,
+            string emailUserName = null,
+            string emailPassword = null)
         {
+            if (string.IsNullOrEmpty(emailAddresses))
+            {
+                throw new InvalidOperationException();
+            }
+
             config = new Configuration();
 
-            this._emailFrom = emailFrom;
             this._emailAddresses = emailAddresses;
+            this._emailFrom = emailFrom;
             this._emailSubject = emailSubject;
             this._emailBody = emailBody;
+            this._emailHost = emailHost;
+            this._emailUserName = emailUserName;
+            this._emailPassword = emailPassword;
 
+            if (string.IsNullOrEmpty(emailFrom))
+            {
+                this._emailFrom = config.SinaEmailAddress;
+            }
             if (string.IsNullOrEmpty(emailHost))
             {
                 this._emailHost = config.SinaEmailHost;
