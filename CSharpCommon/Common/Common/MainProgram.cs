@@ -13,8 +13,8 @@ namespace Test
     {
         static void Main(string[] args)
         {
-             // EmailServerTest();
-             HouseRankingTest();
+            // EmailServerTest();
+           //  HouseRankingTest();
         }
 
         static void EmailServerTest()

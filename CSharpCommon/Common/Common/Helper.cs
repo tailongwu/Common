@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Security.Cryptography;
 
 namespace Common
 {
@@ -38,6 +39,40 @@ namespace Common
                 return string.Empty;
             }
             return match.Value;
+        }
+
+        public static string GetMd5Hash(string input)
+        {
+            MD5CryptoServiceProvider md5Hasher = new MD5CryptoServiceProvider();
+            byte[] inputBytes = Encoding.Default.GetBytes(input);
+            byte[] data = md5Hasher.ComputeHash(inputBytes);
+
+            StringBuilder sBuilder = new StringBuilder();
+            for (int i = 0; i < data.Length; i++)
+            {
+                sBuilder.Append(data[i].ToString("x2"));
+            }
+
+            return sBuilder.ToString();
+        }
+
+        static bool VerifyMd5Hash(string input, string hash)
+        {
+            string hashOfInput = GetMd5Hash(input);
+            StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+            return 0 == comparer.Compare(hashOfInput, hash);
+        }
+
+        public static string EncryptBase64(string input)
+        {
+            byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+            return Convert.ToBase64String(inputBytes);
+        }
+
+        public static string DecryptBase64(string input)
+        {
+            byte[] inputBytes = Convert.FromBase64String(input);
+            return Encoding.UTF8.GetString(inputBytes);
         }
     }
 }

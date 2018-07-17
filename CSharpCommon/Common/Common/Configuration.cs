@@ -84,18 +84,18 @@ namespace Common
 
             // Initialize sina email info
             XmlNode sinaEmailInfoNode = configurationNode.SelectSingleNode("sinaEmailInfo");
-            this._sinaEmailAddress = sinaEmailInfoNode.SelectSingleNode("account").InnerText;
-            this._sinaEmailPassword = sinaEmailInfoNode.SelectSingleNode("password").InnerText;
-            this._sinaEmailHost = sinaEmailInfoNode.SelectSingleNode("host").InnerText;
+            this._sinaEmailAddress = Helper.DecryptBase64(sinaEmailInfoNode.SelectSingleNode("account").InnerText);
+            this._sinaEmailPassword = Helper.DecryptBase64(sinaEmailInfoNode.SelectSingleNode("password").InnerText);
+            this._sinaEmailHost = Helper.DecryptBase64(sinaEmailInfoNode.SelectSingleNode("host").InnerText);
 
             // Initialize tailong's info
             XmlNode tailongInfoNode = configurationNode.SelectSingleNode("tailongInfo");
-            this._tailongID = tailongInfoNode.SelectSingleNode("id").InnerText;
-            this._tailongQQEmail = tailongInfoNode.SelectSingleNode("qqEmail").InnerText;
+            this._tailongID = Helper.DecryptBase64(tailongInfoNode.SelectSingleNode("id").InnerText);
+            this._tailongQQEmail = Helper.DecryptBase64(tailongInfoNode.SelectSingleNode("qqEmail").InnerText);
 
             // Initialize xiyun's info
             XmlNode xiyunInfoNode = configurationNode.SelectSingleNode("xiyunInfo");
-            this._xiyunQQEmail = xiyunInfoNode.SelectSingleNode("qqEmail").InnerText;
+            this._xiyunQQEmail = Helper.DecryptBase64(xiyunInfoNode.SelectSingleNode("qqEmail").InnerText);
         }
     }
 }

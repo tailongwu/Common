@@ -36,7 +36,7 @@ namespace Programs
             if (!ranking.Equals(Last_Query_Ranking))
             {
                 Last_Query_Ranking = ranking;
-                // SendEmailWithHouseRanking(ranking);
+                SendEmailWithHouseRanking(ranking);
             }
             Thread.Sleep(1000 * 60 * 60);
         }
