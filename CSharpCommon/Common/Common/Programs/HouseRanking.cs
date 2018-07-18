@@ -32,13 +32,16 @@ namespace Programs
 
         public void Run()
         {
-            string ranking = GetCurrentHouseRanking();
-            if (!ranking.Equals(Last_Query_Ranking))
+            while (true)
             {
-                Last_Query_Ranking = ranking;
-                SendEmailWithHouseRanking(ranking);
+                string ranking = GetCurrentHouseRanking();
+                if (!ranking.Equals(Last_Query_Ranking))
+                {
+                    Last_Query_Ranking = ranking;
+                    SendEmailWithHouseRanking(ranking);
+                }
+                Thread.Sleep(1000 * 60 * 60);
             }
-            Thread.Sleep(1000 * 60 * 60);
         }
 
         public void SendEmailWithHouseRanking(string ranking)
