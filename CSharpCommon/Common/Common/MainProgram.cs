@@ -14,14 +14,10 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            while (true)
-            {
-                for (int i = 0; i < 5; i++)
-                    Logger.WriteLog("This is a test" + i);
-                Thread.Sleep(3000);
-            }
-           // EmailServerTest();
-           //  HouseRankingTest();
+
+            // EmailServerTest();
+            // HouseRankingTest();
+            // WriteLogTest();
         }
 
         static void EmailServerTest()
@@ -34,6 +30,20 @@ namespace Test
         {
             HouseRanking rank = new HouseRanking();
             rank.Run();
+        }
+
+        static void WriteLogTest()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                Thread thread = new Thread(new ParameterizedThreadStart(Log));
+                thread.Start(i);
+            }
+        }
+
+        static void Log(object info)
+        {
+            Logger.WriteLog(info.ToString());
         }
     }
 }
