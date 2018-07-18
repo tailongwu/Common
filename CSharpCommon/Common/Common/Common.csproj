@@ -47,6 +47,7 @@
     <Compile Include="EmailServer.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="HttpHelper.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="MainProgram.cs" />
     <Compile Include="Programs\HouseRanking.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -13,7 +13,9 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            // EmailServerTest();
+            for (int i = 0; i < 5; i++)
+            Logger.WriteLog("This is a test" + i);
+           // EmailServerTest();
            //  HouseRankingTest();
         }
 

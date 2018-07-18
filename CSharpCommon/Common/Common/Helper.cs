@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Security.Cryptography;
+using System.Threading;
 
 namespace Common
 {
@@ -20,6 +21,37 @@ namespace Common
                 content = reader.ReadToEnd();
             }
             return content;
+        }
+
+        public static void AppendToFile(string filePath, string input)
+        {
+            using (FileStream fs = new FileStream(filePath, FileMode.Append))
+            {
+                using (StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("gb2312")))
+                {
+                    sw.WriteLine(input);
+                }
+            }
+        }
+
+        public static bool CheckIfFolderExists(string folderPath)
+        {
+            return Directory.Exists(folderPath);
+        }
+
+        public static bool CheckIfFileExists(string filePath)
+        {
+            return File.Exists(filePath);
+        }
+
+        public static void CreateFolder(string folderPath)
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+
+        public static void CreateFile(string filePath)
+        {
+            File.Create(filePath).Close();
         }
 
         public static XmlDocument LoadXML(string filePath)
