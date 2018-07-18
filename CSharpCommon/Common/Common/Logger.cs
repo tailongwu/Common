@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Common
@@ -9,18 +10,22 @@ namespace Common
     public static class Logger
     {
         const string LOG_PATH = @"D:\Logs";
+        const int INTERNAL_MINUTES = 60;
 
         private static DateTime latestFileTime = DateTime.UtcNow;
         private static string logFilePath = string.Empty;
-
+        
         public static void WriteLog(string logInfo)
         {
-            UpdateLogFilePath();
-            Helper.AppendToFile(logFilePath, 
-                string.Format(
-                    "{0} {1}",
-                    DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"),
-                    logInfo));
+            lock(logFilePath)
+            {
+                UpdateLogFilePath();
+                Helper.AppendToFile(logFilePath,
+                    string.Format(
+                        "{0} {1}",
+                        DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"),
+                        logInfo));
+            }
         }
         
         private static void UpdateLogFilePath()
@@ -35,7 +40,7 @@ namespace Common
                 latestFileTime = DateTime.UtcNow;
                 logFilePath = string.Format("{0}\\{1}.txt", LOG_PATH, GetTimeString(latestFileTime));
             }
-            else if (latestFileTime.AddHours(1) < DateTime.UtcNow)
+            else if (latestFileTime.AddMinutes(INTERNAL_MINUTES) < DateTime.UtcNow)
             {
                 latestFileTime = DateTime.UtcNow;
                 logFilePath = string.Format("{0}\\{1}.txt", LOG_PATH, GetTimeString(latestFileTime));

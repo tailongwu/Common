@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Common;
 using HttpCommon;
@@ -13,8 +14,12 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            for (int i = 0; i < 5; i++)
-            Logger.WriteLog("This is a test" + i);
+            while (true)
+            {
+                for (int i = 0; i < 5; i++)
+                    Logger.WriteLog("This is a test" + i);
+                Thread.Sleep(3000);
+            }
            // EmailServerTest();
            //  HouseRankingTest();
         }
