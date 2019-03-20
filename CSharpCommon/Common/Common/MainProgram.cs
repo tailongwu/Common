@@ -18,6 +18,18 @@ namespace Test
             // EmailServerTest();
             // HouseRankingTest();
             // WriteLogTest();
+
+            for (int i = 13; i < 1000; i++)
+            {
+                string url = "http://www.gebipuzi.cn/exitentry/zxkf_{0}.htm";
+                url = string.Format(url, i.ToString());
+                // Console.WriteLine(url);
+                string html = HttpHelper.ReadHttpWebResponse(HttpHelper.GETRequest(url));
+                if (html.Contains("L签"))
+                {
+                    Console.WriteLine(i);
+                }
+            }
         }
 
         static void EmailServerTest()

@@ -11,6 +11,15 @@ namespace HttpCommon
 {
     public static class HttpHelper
     {
+        public static HttpWebResponse GETRequest(string url)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.CreateHttp(url);
+            request.Method = Constants.GET_Method;
+            request.ContentType = Constants.Content_Type;
+            request.Accept = Constants.Accept_Language;
+            return (HttpWebResponse)request.GetResponse();
+        }
+
         public static HttpWebResponse POSTRequest(string url, string body)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.CreateHttp(url);
